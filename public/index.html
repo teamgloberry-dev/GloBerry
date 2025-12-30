@@ -450,13 +450,6 @@
 
 
     <script>
-        // Add event listeners when DOM loads
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('booking-form').addEventListener('submit', submitBooking);
-            document.getElementById('contact-form').addEventListener('submit', submitContact);
-            document.getElementById('partner-form').addEventListener('submit', submitPartner);
-        });
-        
         function showBooking() {
             document.getElementById('booking-modal').classList.remove('hidden');
         }
@@ -491,122 +484,6 @@
             } else {
                 table.classList.add('hidden');
                 btn.innerHTML = '<i class="fas fa-chevron-down mr-2"></i>Compare All Features';
-            }
-        }
-        
-        async function submitBooking(event) {
-            event.preventDefault();
-            const form = event.target;
-            const submitBtn = form.querySelector('button[type="submit"]');
-            
-            // Prevent double submission
-            if (submitBtn.disabled) return;
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting...';
-            
-            const data = {
-                name: form.querySelector('input[placeholder="Full Name"]').value,
-                email: form.querySelector('input[placeholder="Email"]').value,
-                phone: form.querySelector('input[placeholder="Phone Number"]').value,
-                package: form.querySelector('#package-select').value,
-                requirements: form.querySelector('textarea').value
-            };
-            
-            try {
-                const response = await fetch('/api/booking', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                const result = await response.json();
-                if (response.ok) {
-                    alert('Booking confirmed!');
-                    hideModals();
-                    form.reset();
-                } else {
-                    alert('Booking failed: ' + result.error);
-                }
-            } catch (error) {
-                alert('Booking failed: ' + error.message);
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Book Now';
-            }
-        }
-        
-        async function submitContact(event) {
-            event.preventDefault();
-            const form = event.target;
-            const submitBtn = form.querySelector('button[type="submit"]');
-            
-            // Prevent double submission
-            if (submitBtn.disabled) return;
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-            
-            const data = {
-                name: form.querySelector('input[placeholder="Your Name"]').value,
-                email: form.querySelector('input[placeholder="Your Email"]').value,
-                message: form.querySelector('textarea').value
-            };
-            
-            try {
-                const response = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                const result = await response.json();
-                if (response.ok) {
-                    alert('Message sent successfully!');
-                    form.reset();
-                } else {
-                    alert('Failed to send message: ' + result.error);
-                }
-            } catch (error) {
-                alert('Failed to send message: ' + error.message);
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Send Message';
-            }
-        }
-        
-        async function submitPartner(event) {
-            event.preventDefault();
-            const form = event.target;
-            const submitBtn = form.querySelector('button[type="submit"]');
-            
-            // Prevent double submission
-            if (submitBtn.disabled) return;
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting...';
-            
-            const data = {
-                name: form.querySelector('input[placeholder="Name/Organization"]').value,
-                email: form.querySelector('input[placeholder="Email"]').value,
-                type: form.querySelector('select').value,
-                message: form.querySelector('textarea').value
-            };
-            
-            try {
-                const response = await fetch('/api/partner', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                const result = await response.json();
-                if (response.ok) {
-                    alert('Application submitted!');
-                    hideModals();
-                    form.reset();
-                } else {
-                    alert('Submission failed: ' + result.error);
-                }
-            } catch (error) {
-                alert('Submission failed: ' + error.message);
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit Application';
             }
         }
     </script>
