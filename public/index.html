@@ -359,7 +359,7 @@
                     </div>
                 </div>
                 <div>
-                    <form id="contact-form" class="space-y-4" onsubmit="submitContact(event)">
+                    <form id="contact-form" class="space-y-4">
                         <input type="text" placeholder="Your Name" class="w-full p-3 border rounded-lg" required>
                         <input type="email" placeholder="Your Email" class="w-full p-3 border rounded-lg" required>
                         <textarea placeholder="Your Message" rows="5" class="w-full p-3 border rounded-lg" required></textarea>
@@ -409,7 +409,7 @@
     <div id="booking-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white p-8 rounded-lg w-96 max-h-screen overflow-y-auto">
             <h3 class="text-2xl font-bold mb-4">Book Your Package</h3>
-            <form id="booking-form" onsubmit="submitBooking(event)">
+            <form id="booking-form">
                 <input type="text" placeholder="Full Name" class="w-full p-3 border rounded mb-4" required>
                 <input type="email" placeholder="Email" class="w-full p-3 border rounded mb-4" required>
                 <input type="tel" placeholder="Phone Number" class="w-full p-3 border rounded mb-4" required>
@@ -431,7 +431,7 @@
     <div id="partner-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white p-8 rounded-lg w-96 max-h-screen overflow-y-auto">
             <h3 class="text-2xl font-bold mb-4">Become a Partner</h3>
-            <form id="partner-form" onsubmit="submitPartner(event)">
+            <form id="partner-form">
                 <input type="text" placeholder="Name/Organization" class="w-full p-3 border rounded mb-4" required>
                 <input type="email" placeholder="Email" class="w-full p-3 border rounded mb-4" required>
                 <select class="w-full p-3 border rounded mb-4" required>
@@ -450,6 +450,13 @@
 
 
     <script>
+        // Add event listeners when DOM loads
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('booking-form').addEventListener('submit', submitBooking);
+            document.getElementById('contact-form').addEventListener('submit', submitContact);
+            document.getElementById('partner-form').addEventListener('submit', submitPartner);
+        });
+        
         function showBooking() {
             document.getElementById('booking-modal').classList.remove('hidden');
         }
