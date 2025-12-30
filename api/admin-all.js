@@ -11,7 +11,7 @@ module.exports = async function handler(req, res) {
   // Login
   if (action === 'login' && req.method === 'POST') {
     const { username, password } = req.body;
-    if (username === 'admin' && password === 'admin123') {
+    if (username === 'GloBerryAdmin' && password === 'GloBerry2026') {
       return res.json({ success: true, token: 'demo-token', user: { username: 'admin' }});
     }
     return res.status(401).json({ error: 'Invalid credentials' });
