@@ -236,7 +236,7 @@
                 const password = document.getElementById('password').value;
                 
                 try {
-                    const response = await fetch('/api/admin/login', {
+                    const response = await fetch('/api/admin-all?action=login', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ username, password })
@@ -287,7 +287,7 @@
         
         async function loadDashboardData() {
             try {
-                const response = await fetch('/api/admin/dashboard', {
+                const response = await fetch('/api/admin-all?action=dashboard', {
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
                 const data = await response.json();
@@ -431,7 +431,7 @@
         
         async function loadBookings() {
             try {
-                const response = await fetch('/api/admin/bookings', {
+                const response = await fetch('/api/admin-all?action=bookings', {
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
                 const bookings = await response.json();
@@ -481,7 +481,7 @@
         
         async function loadContacts() {
             try {
-                const response = await fetch('/api/admin/contacts', {
+                const response = await fetch('/api/admin-all?action=contacts', {
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
                 const contacts = await response.json();
@@ -530,7 +530,7 @@
         
         async function loadPartners() {
             try {
-                const response = await fetch('/api/admin/partners', {
+                const response = await fetch('/api/admin-all?action=partners', {
                     headers: { 'Authorization': `Bearer ${authToken}` }
                 });
                 const partners = await response.json();
@@ -580,13 +580,13 @@
         async function updateBookingStatus(id, status) {
             try {
                 console.log('Updating booking:', id, status);
-                const response = await fetch(`/api/admin/bookings/${id}`, {
+                const response = await fetch('/api/admin-all?action=booking', {
                     method: 'PUT',
                     headers: {
                         'Authorization': `Bearer ${authToken}`,
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ status })
+                    body: JSON.stringify({ id, status })
                 });
                 
                 const result = await response.json();
