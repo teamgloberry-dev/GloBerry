@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Debug Test</title>
+</head>
+<body>
+    <h1>Debug Form Submissions</h1>
+    
+    <h2>Test Booking Form</h2>
+    <button onclick="testBooking()">Test Booking API</button>
+    
+    <h2>Test Contact Form</h2>
+    <button onclick="testContact()">Test Contact API</button>
+    
+    <h2>Test Partner Form</h2>
+    <button onclick="testPartner()">Test Partner API</button>
+    
+    <div id="results"></div>
+
+    <script>
+        async function testBooking() {
+            try {
+                const response = await fetch('/api/booking', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: 'Test User',
+                        email: 'test@example.com',
+                        phone: '123456789',
+                        package: 'starter',
+                        requirements: 'Test booking'
+                    })
+                });
+                
+                const result = await response.json();
+                document.getElementById('results').innerHTML += `<p>Booking: ${JSON.stringify(result)}</p>`;
+            } catch (error) {
+                document.getElementById('results').innerHTML += `<p>Booking Error: ${error.message}</p>`;
+            }
+        }
+
+        async function testContact() {
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: 'Test Contact',
+                        email: 'contact@example.com',
+                        message: 'Test message'
+                    })
+                });
+                
+                const result = await response.json();
+                document.getElementById('results').innerHTML += `<p>Contact: ${JSON.stringify(result)}</p>`;
+            } catch (error) {
+                document.getElementById('results').innerHTML += `<p>Contact Error: ${error.message}</p>`;
+            }
+        }
+
+        async function testPartner() {
+            try {
+                const response = await fetch('/api/partner', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: 'Test Partner',
+                        email: 'partner@example.com',
+                        type: 'volunteer',
+                        message: 'Test partner application'
+                    })
+                });
+                
+                const result = await response.json();
+                document.getElementById('results').innerHTML += `<p>Partner: ${JSON.stringify(result)}</p>`;
+            } catch (error) {
+                document.getElementById('results').innerHTML += `<p>Partner Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

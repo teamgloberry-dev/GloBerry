@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAFÉ International - Admin Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-96">
+            <h2 class="text-2xl font-bold mb-6 text-center">Admin Login</h2>
+            <form id="loginForm">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+                    <input type="text" id="username" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <input type="password" id="password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">
+                    Login
+                </button>
+            </form>
+            <div id="loginError" class="mt-4 text-red-600 text-sm hidden"></div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="hidden">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-4">
+                    <div class="flex items-center">
+                        <h1 class="text-2xl font-bold text-gray-900">CAFÉ International Admin</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span id="adminUser" class="text-gray-600"></span>
+                        <button id="logoutBtn" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="bg-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex space-x-8">
+                    <button class="nav-btn text-white px-3 py-4 text-sm font-medium hover:bg-gray-700 active">
+                        <i class="fas fa-chart-line mr-2"></i>Dashboard
+                    </button>
+                    <button class="nav-btn text-gray-300 px-3 py-4 text-sm font-medium hover:bg-gray-700">
+                        <i class="fas fa-calendar-check mr-2"></i>Bookings
+                    </button>
+                    <button class="nav-btn text-gray-300 px-3 py-4 text-sm font-medium hover:bg-gray-700">
+                        <i class="fas fa-envelope mr-2"></i>Contacts
+                    </button>
+                    <button class="nav-btn text-gray-300 px-3 py-4 text-sm font-medium hover:bg-gray-700">
+                        <i class="fas fa-handshake mr-2"></i>Partners
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+            <!-- Dashboard Section -->
+            <div id="dashboardSection" class="section">
+                <div class="px-4 py-6 sm:px-0">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Dashboard Overview</h2>
+                    
+                    <!-- Stats Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white overflow-hidden shadow rounded-lg">
+                            <div class="p-5">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-calendar-check text-blue-600 text-2xl"></i>
+                                    </div>
+                                    <div class="ml-5 w-0 flex-1">
+                                        <dl>
+                                            <dt class="text-sm font-medium text-gray-500 truncate">Total Bookings</dt>
+                                            <dd id="totalBookings" class="text-lg font-medium text-gray-900">-</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white overflow-hidden shadow rounded-lg">
+                            <div class="p-5">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-envelope text-green-600 text-2xl"></i>
+                                    </div>
+                                    <div class="ml-5 w-0 flex-1">
+                                        <dl>
+                                            <dt class="text-sm font-medium text-gray-500 truncate">New Messages</dt>
+                                            <dd id="newMessages" class="text-lg font-medium text-gray-900">-</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white overflow-hidden shadow rounded-lg">
+                            <div class="p-5">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-handshake text-purple-600 text-2xl"></i>
+                                    </div>
+                                    <div class="ml-5 w-0 flex-1">
+                                        <dl>
+                                            <dt class="text-sm font-medium text-gray-500 truncate">Pending Partners</dt>
+                                            <dd id="pendingPartners" class="text-lg font-medium text-gray-900">-</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white overflow-hidden shadow rounded-lg">
+                            <div class="p-5">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-chart-line text-orange-600 text-2xl"></i>
+                                    </div>
+                                    <div class="ml-5 w-0 flex-1">
+                                        <dl>
+                                            <dt class="text-sm font-medium text-gray-500 truncate">This Week</dt>
+                                            <dd id="weeklyActivity" class="text-lg font-medium text-gray-900">-</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Analytics Charts -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <h3 class="text-sm font-semibold mb-2">Package Popularity</h3>
+                            <div style="height: 200px;">
+                                <canvas id="packageChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <h3 class="text-sm font-semibold mb-2">Booking Status Distribution</h3>
+                            <div style="height: 200px;">
+                                <canvas id="statusChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow lg:col-span-2">
+                            <h3 class="text-sm font-semibold mb-2">Weekly Activity Trend</h3>
+                            <div style="height: 250px;">
+                                <canvas id="trendChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bookings Section -->
+            <div id="bookingsSection" class="section hidden">
+                <div class="px-4 py-6 sm:px-0">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-3xl font-bold text-gray-900">Bookings Management</h2>
+                    </div>
+                    
+                    <div class="bg-white shadow overflow-hidden sm:rounded-md">
+                        <div id="bookingsList" class="divide-y divide-gray-200">
+                            <!-- Bookings will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contacts Section -->
+            <div id="contactsSection" class="section hidden">
+                <div class="px-4 py-6 sm:px-0">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-3xl font-bold text-gray-900">Contact Messages</h2>
+                    </div>
+                    
+                    <div class="bg-white shadow overflow-hidden sm:rounded-md">
+                        <div id="contactsList" class="divide-y divide-gray-200">
+                            <!-- Contacts will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Partners Section -->
+            <div id="partnersSection" class="section hidden">
+                <div class="px-4 py-6 sm:px-0">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-3xl font-bold text-gray-900">Partner Applications</h2>
+                    </div>
+                    
+                    <div class="bg-white shadow overflow-hidden sm:rounded-md">
+                        <div id="partnersList" class="divide-y divide-gray-200">
+                            <!-- Partners will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let authToken = localStorage.getItem('adminToken');
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            if (authToken) {
+                showDashboard();
+                loadDashboardData();
+                setupNavigation();
+            } else {
+                showLogin();
+            }
+            
+            // Setup login form
+            document.getElementById('loginForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                try {
+                    const response = await fetch('/api/admin/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, password })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        authToken = data.token;
+                        localStorage.setItem('adminToken', authToken);
+                        document.getElementById('adminUser').textContent = `Welcome, ${data.user.username}`;
+                        showDashboard();
+                        loadDashboardData();
+                        setupNavigation();
+                    } else {
+                        document.getElementById('loginError').textContent = data.error || 'Login failed';
+                        document.getElementById('loginError').classList.remove('hidden');
+                    }
+                } catch (error) {
+                    document.getElementById('loginError').textContent = 'Connection error. Please try again.';
+                    document.getElementById('loginError').classList.remove('hidden');
+                }
+            });
+        });
+        
+        function showLogin() {
+            document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('adminDashboard').classList.add('hidden');
+        }
+        
+        function showDashboard() {
+            document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('adminDashboard').classList.remove('hidden');
+        }
+        
+        function setupNavigation() {
+            // Setup logout button
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+            
+            // Setup navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const sectionName = this.textContent.trim().toLowerCase().split(' ')[0];
+                    showSection(sectionName);
+                });
+            });
+        }
+        
+        async function loadDashboardData() {
+            try {
+                const response = await fetch('/api/admin/dashboard', {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                const data = await response.json();
+                
+                if (data) {
+                    const totalBookings = data.bookings.reduce((sum, item) => sum + parseInt(item.total), 0);
+                    const newMessages = data.contacts.find(item => item.status === 'new')?.total || 0;
+                    const pendingPartners = data.partners.find(item => item.status === 'pending')?.total || 0;
+                    const weeklyActivity = parseInt(data.recentBookings) + parseInt(data.recentContacts);
+                    
+                    document.getElementById('totalBookings').textContent = totalBookings;
+                    document.getElementById('newMessages').textContent = newMessages;
+                    document.getElementById('pendingPartners').textContent = pendingPartners;
+                    document.getElementById('weeklyActivity').textContent = weeklyActivity;
+                    
+                    // Load charts
+                    loadCharts(data);
+                }
+            } catch (error) {
+                console.error('Dashboard load error:', error);
+            }
+        }
+        
+        function loadCharts(data) {
+            // Package Popularity Chart
+            const packageCtx = document.getElementById('packageChart').getContext('2d');
+            new Chart(packageCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Free', 'Starter', 'Essentials', 'Premium'],
+                    datasets: [{
+                        data: [12, 8, 15, 5],
+                        backgroundColor: ['#10B981', '#3B82F6', '#8B5CF6', '#F59E0B']
+                    }]
+                },
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } } }
+                }
+            });
+            
+            // Status Distribution Chart
+            const statusCtx = document.getElementById('statusChart').getContext('2d');
+            const statusData = data.bookings.map(item => parseInt(item.total));
+            const statusLabels = data.bookings.map(item => item.status);
+            
+            new Chart(statusCtx, {
+                type: 'pie',
+                data: {
+                    labels: statusLabels,
+                    datasets: [{
+                        data: statusData,
+                        backgroundColor: ['#EF4444', '#F59E0B', '#10B981', '#6B7280']
+                    }]
+                },
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } } }
+                }
+            });
+            
+            // Weekly Trend Chart
+            const trendCtx = document.getElementById('trendChart').getContext('2d');
+            new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Bookings',
+                        data: [3, 5, 2, 8, 6, 4, 7],
+                        borderColor: '#3B82F6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true
+                    }, {
+                        label: 'Contacts',
+                        data: [2, 3, 4, 5, 3, 6, 4],
+                        borderColor: '#10B981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 10 } } } },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { font: { size: 10 } } },
+                        x: { ticks: { font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+        
+        function logout() {
+            authToken = null;
+            localStorage.removeItem('adminToken');
+            showLogin();
+        }
+        
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Update navigation
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active', 'text-white');
+                btn.classList.add('text-gray-300');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName + 'Section').classList.remove('hidden');
+            
+            // Update active nav button
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.textContent.toLowerCase().includes(sectionName)) {
+                    btn.classList.add('active', 'text-white');
+                    btn.classList.remove('text-gray-300');
+                }
+            });
+            
+            // Load section data
+            switch(sectionName) {
+                case 'dashboard':
+                    loadDashboardData();
+                    break;
+                case 'bookings':
+                    loadBookings();
+                    break;
+                case 'contacts':
+                    loadContacts();
+                    break;
+                case 'partners':
+                    loadPartners();
+                    break;
+            }
+        }
+        
+        async function loadBookings() {
+            try {
+                const response = await fetch('/api/admin/bookings', {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                const bookings = await response.json();
+                
+                const container = document.getElementById('bookingsList');
+                container.innerHTML = '';
+                
+                if (bookings.length === 0) {
+                    container.innerHTML = '<div class="px-4 py-8 text-center text-gray-500">No bookings found</div>';
+                    return;
+                }
+                
+                bookings.forEach(booking => {
+                    const div = document.createElement('div');
+                    div.className = 'px-4 py-4 sm:px-6 border-b';
+                    div.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-indigo-600">${booking.name}</p>
+                                <p class="text-sm text-gray-500">${booking.email} - ${booking.package.toUpperCase()}</p>
+                                <p class="text-xs text-gray-400">${new Date(booking.created_at).toLocaleDateString()}</p>
+                                ${booking.requirements ? `<p class="text-sm text-gray-600 mt-1">${booking.requirements}</p>` : ''}
+                            </div>
+                            <div class="ml-4">
+                                <select class="text-sm border rounded px-2 py-1 booking-status-select" data-id="${booking.id}">
+                                    <option value="pending" ${booking.status === 'pending' ? 'selected' : ''}>Pending</option>
+                                    <option value="confirmed" ${booking.status === 'confirmed' ? 'selected' : ''}>Confirmed</option>
+                                    <option value="completed" ${booking.status === 'completed' ? 'selected' : ''}>Completed</option>
+                                    <option value="cancelled" ${booking.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+                                </select>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+                
+                // Add event listeners to booking status selects
+                document.querySelectorAll('.booking-status-select').forEach(select => {
+                    select.addEventListener('change', function() {
+                        updateBookingStatus(this.dataset.id, this.value);
+                    });
+                });
+            } catch (error) {
+                console.error('Bookings load error:', error);
+            }
+        }
+        
+        async function loadContacts() {
+            try {
+                const response = await fetch('/api/admin/contacts', {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                const contacts = await response.json();
+                
+                const container = document.getElementById('contactsList');
+                container.innerHTML = '';
+                
+                if (contacts.length === 0) {
+                    container.innerHTML = '<div class="px-4 py-8 text-center text-gray-500">No contacts found</div>';
+                    return;
+                }
+                
+                contacts.forEach(contact => {
+                    const div = document.createElement('div');
+                    div.className = 'px-4 py-4 sm:px-6 border-b';
+                    div.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-indigo-600">${contact.name}</p>
+                                <p class="text-sm text-gray-500">${contact.email}</p>
+                                <p class="text-sm text-gray-600 mt-1">${contact.message}</p>
+                                <p class="text-xs text-gray-400">${new Date(contact.created_at).toLocaleDateString()}</p>
+                            </div>
+                            <div class="ml-4">
+                                <select class="text-sm border rounded px-2 py-1 contact-status-select" data-id="${contact.id}">
+                                    <option value="new" ${contact.status === 'new' ? 'selected' : ''}>New</option>
+                                    <option value="read" ${contact.status === 'read' ? 'selected' : ''}>Read</option>
+                                    <option value="resolved" ${contact.status === 'resolved' ? 'selected' : ''}>Resolved</option>
+                                </select>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+                
+                // Add event listeners to contact status selects
+                document.querySelectorAll('.contact-status-select').forEach(select => {
+                    select.addEventListener('change', function() {
+                        updateContactStatus(this.dataset.id, this.value);
+                    });
+                });
+            } catch (error) {
+                console.error('Contacts load error:', error);
+            }
+        }
+        
+        async function loadPartners() {
+            try {
+                const response = await fetch('/api/admin/partners', {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                const partners = await response.json();
+                
+                const container = document.getElementById('partnersList');
+                container.innerHTML = '';
+                
+                if (partners.length === 0) {
+                    container.innerHTML = '<div class="px-4 py-8 text-center text-gray-500">No partners found</div>';
+                    return;
+                }
+                
+                partners.forEach(partner => {
+                    const div = document.createElement('div');
+                    div.className = 'px-4 py-4 sm:px-6 border-b';
+                    div.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-indigo-600">${partner.name}</p>
+                                <p class="text-sm text-gray-500">${partner.email} - ${partner.type}</p>
+                                ${partner.message ? `<p class="text-sm text-gray-600 mt-1">${partner.message}</p>` : ''}
+                                <p class="text-xs text-gray-400">${new Date(partner.created_at).toLocaleDateString()}</p>
+                            </div>
+                            <div class="ml-4">
+                                <select class="text-sm border rounded px-2 py-1 partner-status-select" data-id="${partner.id}">
+                                    <option value="pending" ${partner.status === 'pending' ? 'selected' : ''}>Pending</option>
+                                    <option value="approved" ${partner.status === 'approved' ? 'selected' : ''}>Approved</option>
+                                    <option value="rejected" ${partner.status === 'rejected' ? 'selected' : ''}>Rejected</option>
+                                </select>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+                
+                // Add event listeners to partner status selects
+                document.querySelectorAll('.partner-status-select').forEach(select => {
+                    select.addEventListener('change', function() {
+                        updatePartnerStatus(this.dataset.id, this.value);
+                    });
+                });
+            } catch (error) {
+                console.error('Partners load error:', error);
+            }
+        }
+        
+        async function updateBookingStatus(id, status) {
+            try {
+                console.log('Updating booking:', id, status);
+                const response = await fetch(`/api/admin/bookings/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status })
+                });
+                
+                const result = await response.json();
+                console.log('Update result:', result);
+                
+                if (response.ok) {
+                    alert('Status updated successfully!');
+                    loadBookings();
+                } else {
+                    alert('Update failed: ' + (result.error || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Update booking error:', error);
+                alert('Update error: ' + error.message);
+            }
+        }
+        
+
+        
+        async function updateContactStatus(id, status) {
+            try {
+                console.log('Updating contact:', id, status);
+                const response = await fetch(`/api/admin/contacts/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status })
+                });
+                
+                const result = await response.json();
+                console.log('Contact update result:', result);
+                
+                if (response.ok) {
+                    alert('Contact status updated successfully!');
+                    loadContacts();
+                    loadDashboardData();
+                } else {
+                    alert('Update failed: ' + (result.error || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Update contact error:', error);
+                alert('Update error: ' + error.message);
+            }
+        }
+        
+        async function updatePartnerStatus(id, status) {
+            try {
+                console.log('Updating partner:', id, status);
+                const response = await fetch(`/api/admin/partners/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status })
+                });
+                
+                const result = await response.json();
+                console.log('Partner update result:', result);
+                
+                if (response.ok) {
+                    alert('Partner status updated successfully!');
+                    loadPartners();
+                    loadDashboardData();
+                } else {
+                    alert('Update failed: ' + (result.error || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Update partner error:', error);
+                alert('Update error: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

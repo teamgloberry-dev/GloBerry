@@ -1,0 +1,224 @@
+/* Custom styles for CAFÉ International */
+
+/* Line clamp utility for text truncation */
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Smooth transitions */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Enhanced card hover effects */
+.project-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Star rating hover effects */
+.star-btn {
+    transition: color 0.2s ease, transform 0.1s ease;
+    cursor: pointer;
+}
+
+.star-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Loading animation */
+.loading-spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Notification animations */
+.notification-enter {
+    animation: slideInRight 0.3s ease;
+}
+
+.notification-exit {
+    animation: slideOutRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Modal animations */
+.modal-backdrop {
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-content {
+    animation: slideInUp 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Enhanced form styles */
+.form-input:focus {
+    ring-color: #3b82f6;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Status badges */
+.status-active {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-completed {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.status-on-hold {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+/* Experience cards */
+.experience-card {
+    border-left: 4px solid #3b82f6;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    transition: all 0.2s ease;
+}
+
+.experience-card:hover {
+    border-left-color: #1d4ed8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Statistics cards */
+.stat-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Search and filter section */
+.search-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 1rem;
+        width: calc(100% - 2rem);
+        max-height: calc(100vh - 2rem);
+        overflow-y: auto;
+    }
+    
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .stat-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Dark mode support (optional) */
+@media (prefers-color-scheme: dark) {
+    .dark-mode {
+        background-color: #1f2937;
+        color: #f9fafb;
+    }
+    
+    .dark-mode .bg-white {
+        background-color: #374151;
+    }
+    
+    .dark-mode .text-gray-800 {
+        color: #f9fafb;
+    }
+    
+    .dark-mode .text-gray-600 {
+        color: #d1d5db;
+    }
+}
