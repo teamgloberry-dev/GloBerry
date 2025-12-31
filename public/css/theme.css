@@ -1,0 +1,24 @@
+/* Custom color theme override */
+:root {
+  --primary-color: #ef241c;
+  --primary-hover: #d91e17;
+}
+
+/* Override Tailwind red classes with new color */
+.bg-red-500 { background-color: #ef241c !important; }
+.bg-red-600 { background-color: #d91e17 !important; }
+.hover\:bg-red-600:hover { background-color: #d91e17 !important; }
+.hover\:bg-red-700:hover { background-color: #c41a14 !important; }
+.text-red-500 { color: #ef241c !important; }
+.border-red-200 { border-color: #fecaca !important; }
+.border-red-400 { border-color: #f87171 !important; }
+.border-red-500 { border-color: #ef241c !important; }
+.from-red-400 { --tw-gradient-from: #ef241c !important; }
+.to-red-600 { --tw-gradient-to: #d91e17 !important; }
+
+/* Navigation hover */
+.hover\:text-red-500:hover { color: #ef241c !important; }
+
+/* Button styles */
+button.bg-red-500 { background-color: #ef241c !important; }
+button.bg-red-500:hover { background-color: #d91e17 !important; }
