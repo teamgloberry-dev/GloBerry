@@ -16,15 +16,15 @@
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <img src="images/Globerry Logo.png" alt="GloBerry" class="h-12 w-auto mr-2">
-                    <span class="text-xl font-bold text-gray-800" style="color:#EF241C;">GloBerry</span>
+                    <span class="text-xl font-bold text-gray-800" style="color:#2563eb;">GloBerry</span>
                 </div>
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="#home" class="text-gray-700 hover:text-red-500">Home</a>
-                    <a href="#about" class="text-gray-700 hover:text-red-500">About</a>
-                    <a href="#packages" class="text-gray-700 hover:text-red-500">Packages</a>
-                    <a href="#how-it-works" class="text-gray-700 hover:text-red-500">How It Works</a>
-                    <a href="#contact" class="text-gray-700 hover:text-red-500">Contact</a>
-                    <button onclick="showBooking()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Book Now</button>
+                    <a href="#home" class="text-gray-700 hover:text-blue-600">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-blue-600">About</a>
+                    <a href="#packages" class="text-gray-700 hover:text-blue-600">Packages</a>
+                    <a href="#how-it-works" class="text-gray-700 hover:text-blue-600">How It Works</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-600">Contact</a>
+                    <button onclick="showBooking()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Book Now</button>
                 </div>
                 <div class="md:hidden">
                     <button onclick="toggleMobileMenu()" class="text-gray-700">
@@ -36,18 +36,18 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
             <div class="px-4 py-2 space-y-2">
-                <a href="#home" class="block text-gray-700 hover:text-red-500">Home</a>
-                <a href="#about" class="block text-gray-700 hover:text-red-500">About</a>
-                <a href="#packages" class="block text-gray-700 hover:text-red-500">Packages</a>
-                <a href="#how-it-works" class="block text-gray-700 hover:text-red-500">How It Works</a>
-                <a href="#contact" class="block text-gray-700 hover:text-red-500">Contact</a>
-                <button onclick="showBooking()" class="w-full bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mt-2">Book Now</button>
+                <a href="#home" class="block text-gray-700 hover:text-blue-600">Home</a>
+                <a href="#about" class="block text-gray-700 hover:text-blue-600">About</a>
+                <a href="#packages" class="block text-gray-700 hover:text-blue-600">Packages</a>
+                <a href="#how-it-works" class="block text-gray-700 hover:text-blue-600">How It Works</a>
+                <a href="#contact" class="block text-gray-700 hover:text-blue-600">Contact</a>
+                <button onclick="showBooking()" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mt-2">Book Now</button>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="bg-gradient-to-r from-red-400 to-red-600 text-white pt-24 pb-16">
+    <section id="home" class="bg-gradient-to-r from-blue-500 to-green-500 text-white pt-24 pb-16">
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div>
@@ -55,12 +55,12 @@
                     <p class="text-xl mb-6">Your arrival, setup, and first steps guided with clarity, care, and personal support.</p>
                     <p class="text-lg mb-8 opacity-90">GloBerry supports international students as they navigate arrival, registration, housing search, setup of essentials, and community integration. Our team guides you through every requirement with clarity and care, so you can focus on starting your new life in Berlin without not stressing about paperwork or what to do next.</p>
                     <div class="space-x-4">
-                        <button onclick="showPackages()" class="bg-white text-red-500 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">Explore Packages</button>
-                        <button onclick="showBooking()" class="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-red-500">Book Your Starter Pack</button>
+                        <button onclick="showPackages()" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">Explore Packages</button>
+                        <button onclick="showBooking()" class="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600">Book Your Starter Pack</button>
                     </div>
                 </div>
                 <div class="text-center">
-                    <img src="images/Globerry Logo.png" alt="GloBerry" class="mx-auto w-auto" style="height: 512px; filter: brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);">
+                    <img src="images/Globerry Logo.png" alt="GloBerry" class="mx-auto w-auto opacity-80" style="height: 512px;">
                 </div>
             </div>
         </div>
@@ -77,10 +77,10 @@
                     <p class="text-lg text-gray-600 mb-6">GloBerry was created by students who lived the journey themselves. We all faced the same early challenges, the same uncertainty, and the same search for reliable support. We learned through experience how important it is to have someone who understands what you are going through and can guide you step by step. That experience became the foundation of GloBerry.</p>
                     <p class="text-lg text-gray-600 mb-6">Our purpose is to make your first weeks in Germany simple and well supported. We help you understand what needs to be done, assist with the essential tasks, and make sure you never feel lost in the process. Everything we offer is practical, straightforward, and built around what real students actually need when they first arrive.</p>
                     <p class="text-lg text-gray-600 mb-6">Our ambition is to build a welcoming space where international students feel confident, informed, and at home from the moment they step into the country. We want GloBerry to grow into a trusted community where guidance is clear, support is reliable, and every student knows they have someone to turn to. Through our work, we aim to shape a smoother, more connected experience for anyone starting a new chapter in Germany.</p>
-                    <button onclick="showPartnerForm()" class="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600">Become a Partner</button>
+                    <button onclick="showPartnerForm()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Become a Partner</button>
                 </div>
                 <div class="text-center">
-                    <i class="fas fa-users text-8xl text-red-500 opacity-80"></i>
+                    <i class="fas fa-users text-8xl text-blue-600 opacity-80"></i>
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
                 <!-- Starter Pack -->
                 <div class="bg-white border-2 border-gray-200 rounded-lg p-6 text-center shadow-lg">
                     <h3 class="text-xl font-bold mb-2">Starter Pack</h3>
-                    <p class="text-3xl font-bold text-red-500 mb-4">€0</p>
+                    <p class="text-3xl font-bold text-blue-600 mb-4">€0</p>
                     <p class="text-sm text-gray-600 mb-4">Perfect for getting started</p>
                     <ul class="text-sm text-left space-y-1 mb-6">
                         <li>• Welcome coffee</li>
@@ -107,9 +107,9 @@
                 </div>
                 
                 <!-- Essentials -->
-                <div class="bg-white border-2 border-red-200 rounded-lg p-6 text-center shadow-lg">
+                <div class="bg-white border-2 border-blue-200 rounded-lg p-6 text-center shadow-lg">
                     <h3 class="text-xl font-bold mb-2">Essentials</h3>
-                    <p class="text-3xl font-bold text-red-500 mb-4">€34.99</p>
+                    <p class="text-3xl font-bold text-blue-600 mb-4">€34.99</p>
                     <p class="text-sm text-gray-600 mb-4">Essential services for arrival</p>
                     <ul class="text-sm text-left space-y-1 mb-6">
                         <li>• All Starter features</li>
@@ -117,14 +117,14 @@
                         <li>• SIM card setup</li>
                         <li>• Anmeldung guidance</li>
                     </ul>
-                    <button onclick="bookPackage('essentials')" class="w-full bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 font-semibold">Book Now</button>
+                    <button onclick="bookPackage('essentials')" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 font-semibold">Book Now</button>
                 </div>
                 
                 <!-- Premium -->
-                <div class="bg-white border-2 border-red-400 rounded-lg p-6 text-center shadow-lg relative">
-                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-1 rounded-full text-sm">Popular</div>
+                <div class="bg-white border-2 border-green-400 rounded-lg p-6 text-center shadow-lg relative">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-1 rounded-full text-sm">Popular</div>
                     <h3 class="text-xl font-bold mb-2">Premium</h3>
-                    <p class="text-3xl font-bold text-red-500 mb-4">€64.99</p>
+                    <p class="text-3xl font-bold text-green-600 mb-4">€64.99</p>
                     <p class="text-sm text-gray-600 mb-4">Complete integration support</p>
                     <ul class="text-sm text-left space-y-1 mb-6">
                         <li>• All Essentials features</li>
